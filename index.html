@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-title" content="小小收銀機">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#000000">
+
+    <link rel="manifest" href="manifest.json">
 
     <title>小店長收銀機</title>
     <style>
@@ -57,14 +59,17 @@
 </head>
 <body>
 
-    <button id="startBtn">🛍️ 開始收銀</button>
+    <button id="startBtn">💰開始收銀💰</button>
     
     <div id="videoContainer">
         <video id="video" autoplay playsinline></video>
         <div id="scanLine"></div>
     </div>
     
-    <div id="status">準備好了嗎？</div>
+    <div id="status"> 
+      <font size="5">準備好了嗎？<br>
+                     記得打開音量唷！</font>
+    </div>
 
     <script>
         const startBtn = document.getElementById('startBtn');
@@ -73,7 +78,7 @@
         const status = document.getElementById('status');
         
         let lastScanTime = 0;
-        const cooldown = 2000;
+        const cooldown = 3000;
 
         // 音效合成
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -141,7 +146,7 @@ if (barcodes.length > 0 && (now - lastScanTime > cooldown)) {
   if (navigator.vibrate) navigator.vibrate(50);
   
   setTimeout(() => { status.innerText = "繼續掃描下一個..."; }, 800);
-                        }, 500);
+                        }, 1000);
             }
                           
                           
