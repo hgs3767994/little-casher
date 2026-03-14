@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    
+
     <title>小店長收銀機</title>
     <style>
         body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; background: #f0f0f0; overflow: hidden; }
@@ -54,12 +54,6 @@
         #startBtn { padding: 20px 50px; font-size: 1.6rem; background: #4CAF50; color: white; border: none; border-radius: 50px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 20; }
         #status { margin-top: 20px; color: #555; text-align: center; padding: 0 20px; font-weight: bold; }
     </style>
-  
-<meta name="apple-mobile-web-app-title" content="小小收銀機">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
 </head>
 <body>
 
@@ -133,14 +127,25 @@
                         try {
                             const barcodes = await barcodeDetector.detect(video);
                             const now = Date.now();
-                            if (barcodes.length > 0 && (now - lastScanTime > cooldown)) {
-                                playBeep();
-                                lastScanTime = now;
-                                status.innerText = "嗶！掃到一個商品！";
-                                // 震動回饋 (如果手機支援)
-                                if (navigator.vibrate) navigator.vibrate(50);
-                                setTimeout(() => { status.innerText = "繼續掃描下一個..."; }, 800);
-                            }
+                          
+                          
+if (barcodes.length > 0 && (now - lastScanTime > cooldown)) {     
+              lastScanTime = now;
+              status.innerText = "偵測成功，請稍後";  
+  
+       setTimeout(() => {
+              playBeep();
+              status.innerText = "嗶！掃到一個商品！";
+
+  // 震動回饋 (如果手機支援)
+  if (navigator.vibrate) navigator.vibrate(50);
+  
+  setTimeout(() => { status.innerText = "繼續掃描下一個..."; }, 800);
+                        }, 500);
+            }
+                          
+                          
+                          
                         } catch (err) {
                             // 忽略辨識過程中的小錯誤
                         }
